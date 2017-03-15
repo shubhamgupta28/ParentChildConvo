@@ -3,6 +3,9 @@ package usc.com.uscmaps.example1.shubham.parentchildconvo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,14 +18,24 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,37 +46,56 @@ public class MainActivity extends AppCompatActivity
     private boolean viewIsAtHome;
     private  String TAG = getClass().getSimpleName();
     SharedPreferences sharedPref;
-
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
+    NavigationView navigationView;
+    TextView header_name;
+    TextView header_school;
+    ImageView header_image;
+    LinearLayout ln;
+    View headerview;
+    String jsonDataFirstChild;
+    Gson gson;
+    Type type;
+    Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView= (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        headerview = navigationView.getHeaderView(0);
+        headerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(),"Calling Header", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(v.getContext(), SelectChildActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //TODO: Put this code snippet in Login Activity
 
         String serverData = "{'login_success':'yes','user_data':{'name': 'Shubham Gupta','email':'shubham.gupta@gmail.com','phone':'7838390604','image_url':'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAd_AAAAJDVkOTA1NzBmLTYxMTItNDM2Yy1iZTQ5LTQzNzJhNDI2NDM1NQ.jpg','children':[{'id':'1','name':'Samarth Garg','image_url':'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAa2AAAAJGIxOTgxZGRiLTU4NzctNGNiYy05MmYwLWE5NzU1ZTI4ZGI4Ng.jpg'},{'id':'2','name':'Manan Bhutani','image_url':'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAK3AAAAJDkxYzVhNTE4LTBlNTgtNDAxNC1iOTRlLWY0ZDA5YTQ1YzE3Ng.jpg'}]}}";
         try {
             sharedPref = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-
             SharedPreferences.Editor editor = sharedPref.edit();
-
             JSONObject obj = new JSONObject(serverData);
-
             JSONObject user_data = obj.getJSONObject("user_data");
 
 //            Log.e("My App", user_data.getString("name"));
-            editor.putString("curr_user_name", user_data.getString("name"));
+//            editor.putString("curr_user_name", user_data.getString("name"));
 //            editor.putString("curr_user_email", user_data.getString("email"));
 //            editor.putString("curr_user_phone", user_data.getString("phone"));
 //            editor.putString("curr_user_display_pic", user_data.getString("image_url"));
@@ -71,20 +103,28 @@ public class MainActivity extends AppCompatActivity
             JSONArray children = user_data.getJSONArray("children");
 
             List<ChildrenGSON> list = new ArrayList<ChildrenGSON>();
+            List<ChildrenGSON> list_for_first_child = new ArrayList<ChildrenGSON>();
 
             for(int i = 0; i < children.length();i++){
                 JSONObject children1 = children.getJSONObject(i);
 //                Log.e("curr_user_children_"+i, ""+children1.getString("id"));
 //                Log.e("curr_user_children_"+i, ""+children1.getString("name"));
 //                Log.e("curr_user_children_"+i, ""+children1.getString("image_url"));
+
+                if(i==0){
+                    list_for_first_child.add(new ChildrenGSON(Integer.parseInt(children1.getString("id")), children1.getString("name"),
+                            children1.getString("image_url")));
+                }
                 list.add(new ChildrenGSON(Integer.parseInt(children1.getString("id")), children1.getString("name"),
                         children1.getString("image_url")));
             }
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<ChildrenGSON>>() {}.getType();
+            gson = new Gson();
+            type = new TypeToken<List<ChildrenGSON>>() {}.getType();
             String jsonData = gson.toJson(list, type);
-            Log.e("Added Children Data", jsonData);
+            jsonDataFirstChild = gson.toJson(list_for_first_child, type);
+            Log.e("Added Children Data", ""+jsonData);
             editor.putString("children", jsonData);
+            editor.putString("curr_active_child", jsonDataFirstChild);
 
 //            To get back the json from String converted Gson.
 //            List<ChildrenGSON> fromJson = gson.fromJson(jsonData, type);
@@ -93,10 +133,28 @@ public class MainActivity extends AppCompatActivity
 //            }
 //            Log.e(TAG, sharedPref.getString("curr_user_name", "no string"));
 
+
             editor.commit();
         } catch (Exception t) {
             Log.e("My App", "Could not parse malformed JSON: \"" + serverData + "\"");
         }
+
+        /**
+         * Setting the child from the SharedPref, the first time the app starts, and loading data
+         * into the Navigation Bar
+         */
+        List<ChildrenGSON> fromJson = gson.fromJson(jsonDataFirstChild, type);
+        for (ChildrenGSON task : fromJson) {
+            TextView curr_child_name = (TextView) headerview.findViewById(R.id.curr_child_name);
+            ImageView curr_child_image = (ImageView) headerview.findViewById(R.id.curr_child_image);
+            curr_child_name.setText(task.getName());
+//            Picasso.with(context).load(task.getImage_url()).into(curr_child_image);
+            Glide.with(context)
+                    .load(task.getImage_url())
+                    .placeholder(R.mipmap.child)
+                    .into(curr_child_image);
+        }
+
         displayView(R.id.home);
     }
 
@@ -209,10 +267,7 @@ public class MainActivity extends AppCompatActivity
                 viewIsAtHome = false;
                 break;
             case R.id.calendar:
-                Intent intent = new Intent(this, SelectChildActivity.class);
 
-                startActivity(intent);
-//                fragment = new ApplyForLeaveFragment();
                 title = "Apply for Leave";
                 viewIsAtHome = false;
                 break;
@@ -232,6 +287,51 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
+    }
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            Log.e("src",src);
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            Log.e("Bitmap","returned");
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Exception",e.getMessage());
+            return null;
+        }
     }
 
 
