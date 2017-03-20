@@ -7,4 +7,6 @@
     <string name="action_settings">Settings</string>
     <string name="link1">http://stackoverflow.com/questions/32944798/switch-between-fragments-with-onnavigationitemselected-in-new-navigation-drawer</string>
     <string name="link2">https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView</string>
+    <string name="pick_date">Pick date</string>
+    <string name="sample_parent_name">Sample Teacher Name</string>
 </resources>

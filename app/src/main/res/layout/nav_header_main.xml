@@ -16,10 +16,8 @@
     <ImageView
         android:id="@+id/curr_child_image"
         android:layout_width="85dp"
-        android:layout_height="80dp"
+        android:layout_height="85dp"
         app:srcCompat="@android:drawable/sym_def_app_icon"
-        android:maxWidth="30dp"
-        android:maxHeight="30dp"
         />
 
     <TextView

@@ -1,8 +1,10 @@
 package usc.com.uscmaps.example1.shubham.parentchildconvo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +20,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectChildActivity extends AppCompatActivity {
+public class SelectChildActivity extends AppCompatActivity  {
     private String TAG = getClass().getSimpleName();
-
     SharedPreferences sharedPref;
+
+    Context mtx;
+    ArrayList<ChildrenGSON> tempList = new ArrayList<ChildrenGSON>();
+    NavigationView navigationView;
+    View headerView;
+
+
     /**
      * Reference @string/link2
      * @param savedInstanceState
@@ -30,22 +38,19 @@ public class SelectChildActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_child);
-
+        mtx = this;
         ArrayList<String> list = new ArrayList<>();
-
         sharedPref = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
 
         String jsonData = sharedPref.getString("children", null);
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<ChildrenGSON>>() {}.getType();
+        final Gson gson = new Gson();
+        final Type type = new TypeToken<List<ChildrenGSON>>() {}.getType();
 
         try{
             final List<ChildrenGSON> fromJson = gson.fromJson(jsonData, type);
             for (ChildrenGSON task : fromJson) {
                 list.add(task.getName());
             }
-
-//            Log.e(TAG, ""+list);
             ArrayAdapter<String> childAdapter = new ArrayAdapter<>(this, R.layout.child_select_item_list,
                     list);
 
@@ -60,7 +65,6 @@ public class SelectChildActivity extends AppCompatActivity {
 
                     for (ChildrenGSON task : fromJson) {
                         if(item == task.getName()){
-//                            Log.e(TAG, "clicked: "+task);
                             ArrayList<ChildrenGSON> tempList = new ArrayList<ChildrenGSON>();
                             tempList.add(task);
 
@@ -69,12 +73,14 @@ public class SelectChildActivity extends AppCompatActivity {
                             String jsonData = gson.toJson(tempList, type);
                             editor.putString("curr_active_child", jsonData);
                             editor.commit();
+                            Log.e(TAG, jsonData);
                         }
                     }
-//                    Log.e(TAG, "In shared pref: "+sharedPref.getString("curr_active_child", null));
+                    Intent intent = new Intent(mtx, MainActivity.class);
+                    startActivity(intent);
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e){
             Log.e(TAG, "In catch, Null SharedPref");
         }
     }
