@@ -224,6 +224,17 @@ public class MainActivity extends AppCompatActivity
                 title = "Message";
                 viewIsAtHome = false;
                 break;
+            case R.id.my_account:
+                fragment = new MyAccountFragment();
+                title = "My Account";
+                viewIsAtHome = false;
+                break;
+            case R.id.gallery:
+                fragment = new GalleryFragment();
+                title = "Gallery";
+                viewIsAtHome = false;
+                break;
+
         }
 
         if (fragment != null) {

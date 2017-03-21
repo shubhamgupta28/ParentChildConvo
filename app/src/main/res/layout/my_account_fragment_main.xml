@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?android:attr/actionBarSize"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="99dp"
+        android:layout_height="78dp"
+        app:srcCompat="@mipmap/child"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name of Parent"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/email_image"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_menu_camera"/>
+        <TextView
+            android:id="@+id/email_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:height="20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="guptashu@usc.edu"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/gender_image"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_menu_camera"/>
+        <TextView
+            android:id="@+id/gender_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="Male"
+            android:height="20dp"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/birthday_image"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_menu_camera"/>
+        <EditText
+            android:id="@+id/birthday_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Update your Birthday"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/anniversary_image"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_menu_camera"/>
+        <EditText
+            android:id="@+id/anniversary_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Update your Anniversay Date"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/occupation_image"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_menu_camera"/>
+        <EditText
+            android:id="@+id/occupation_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Update your Occupation"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+
+
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/office_address_image"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_menu_camera"/>
+        <EditText
+            android:id="@+id/office_address_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Update your Office Address"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+
+
+</LinearLayout>
