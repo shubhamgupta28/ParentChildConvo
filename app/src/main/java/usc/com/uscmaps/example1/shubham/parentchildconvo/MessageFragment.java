@@ -29,6 +29,8 @@ public class MessageFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
+
+
     }
 
     @Nullable
@@ -36,6 +38,16 @@ public class MessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e("Fdf", ":Dfd");
         View rootview = inflater.inflate(R.layout.message_main, container, false);
+
+//        Button bt = (Button) rootview.findViewById(R.id.btLeftTemporary);
+//        bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(VerticalLinearRecyclerViewSampleActivity.newIntent(v.getContext()));
+//
+//            }
+//        });
+
 
         String jso = "{  'response' : [    {      'is_starred'  : 'true',      'subject'   : 'Youve been accepted',      'messages_thread' : [        {          'sender_id'     : '1',          'sender_name'   : 'HackCU',          'sender_email'  : 'hack@usc.edu',          'sender_image'  : 'http://random-international.com/wp-content/uploads/2012/10/RR-home-img2.jpg',          'text'      : 'Congratulations, you have been accepted to TrojanHacks 2.0! Were excited to have you join us at a weekend of hacking and learning, built around the idea of giving back to the Trojan community. Check-in is from 9am to 10am this Saturday, March 24th, in King Hall Main Area. If youre looking for a team, arrive early to meet fellow hackers and discuss ideas before the opening ceremony. Bring anything and everything you need to turn your ideas into reality!',          'attachments'     : [                  {                    'type' : 'svg',                    'name' : 'attachment',                    'download_url' : 'www.google.com',                    'size' : '555'                  }                ],          'timestamp'     : '03/24/2017 07:21',          'sent_to'     : [            {              'id' : '1',              'name' : 'Shubham Gupta',              'email' : 'guptashu@usc.edu',              'image_url' : 'http://www.hbc333.com/data/out/193/47081647-random-picture.png'            }         ]        }      ]    },    {      'is_starred'  : 'false',      'subject'   : 'Result Day',      'messages_thread' : [        {          'sender_id'     : '1',          'sender_name'   : 'getReveel',          'sender_email'  : 'getReveel@reveel.com',          'sender_image'  : '',          'text'      : 'Hey Max, Im on way right now, but am stuck in traffic. Will be there in 15 minutes hopefully. Apologies.',          'attachments'     : [                  {                    'type' : 'png',                    'name' : 'attachment',                    'download_url' : 'www.google.com',                    'size' : '555'                  }                ],          'timestamp'     : '03/21/2017 08:21',          'sent_to'     : [            {              'id' : '1',              'name' : 'Shubham Gupta',              'email' : 'strguptashu@usc.eduing',              'image_url' : 'http://www.hbc333.com/data/out/193/47081647-random-picture.png'            }          ]        },        {          'sender_id'     : '2',          'sender_name'   : 'Max',          'sender_email'  : 'max@usc.edu',          'sender_image'  : '',  'text'      : 'Yoyoyoyoyoy Max, Im on way right now, but am stuck in traffic. Will be there in 15 minutes hopefully. Apologies.',        'attachments'     : [                  {                    'type' : 'jpeg',                    'name' : 'attachment',                    'download_url' : 'www.google.com',                    'size' : '33'                  }                ],          'timestamp'     : '03/21/2017 06:21',          'sent_to'     : [            {              'id' : '1',              'name' : 'Shubham Gupta',              'email' : 'strguptashu@usc.eduing',              'image_url' : 'http://www.hbc333.com/data/out/193/47081647-random-picture.png'            }          ]        }      ]    }  ]}  ";
 

@@ -9,6 +9,8 @@
     <string name="link2">https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView</string>
     <!--<String name="link3GmailTypeRecyclerView">http://androidexample.com/Custom_Expandable_ListView_Tutorial_-_Android_Example/index.php?view=article_discription&aid=107&aaid=129</String>-->
     <string name="link4FetchJsonData">http://androidcss.com/android/fetch-json-data-android/</string>
+    <string name="link5ExpandCollapseViews">http://stackoverflow.com/questions/19863409/android-views-expand-animation</string>
+    <string name="link5ExpandCollapseViewsOfficialGoogleWay">http://stackoverflow.com/questions/27203817/recyclerview-expand-collapse-items/38623873#38623873</string>
     <string name="pick_date">Pick date</string>
     <string name="sample_parent_name">Sample Teacher Name</string>
 </resources>

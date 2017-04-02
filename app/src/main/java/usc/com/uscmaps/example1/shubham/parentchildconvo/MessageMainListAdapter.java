@@ -1,6 +1,7 @@
 package usc.com.uscmaps.example1.shubham.parentchildconvo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import usc.com.uscmaps.example1.shubham.parentchildconvo.ExpandableView.ExpandingActivity;
 
 /**
  * Created by Shubham on 3/21/17.
@@ -202,6 +205,9 @@ public class MessageMainListAdapter extends RecyclerView.Adapter<MessageMainList
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             Log.e(TAG, "clicked " + adapterPosition);
+//            Intent intent =  new Intent(this, ExpandingActivity.class);
+            Intent intent =  new Intent(mContext, ExpandingActivity.class);
+            mContext.startActivity(intent);
 
 //            mCursor.moveToPosition(adapterPosition);
 //            String selectedString = mCursor.getString(mCursor.getColumnIndex(WaitListContract.WaitListEntry.COLUMN_BUILDING_NAME));
